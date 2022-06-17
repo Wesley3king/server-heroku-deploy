@@ -1,0 +1,55 @@
+{
+    "numero1": {
+        "poster": "black-clover-logo.png",
+        "nome": "Black Clover",
+        "code": 5,
+        "color": "#c72121"
+        
+    },
+    "numero2": {
+        "poster": "spy-family.webp",
+        "nome": "Spy Family",
+        "code": 63,
+        "color": "aqua"
+        
+    },
+    "numero3": {
+        "poster": "martial-peak.png",
+        "nome": "Martial Peak",
+        "code": 39,
+        "color": "#763E19"
+        
+    },
+    "numero4": {
+        "poster": "the-immortal-swordman.png",
+        "nome": "Immortal Swordsman In The Reverse World",
+        "code": 64,
+        "color": "#42323B"
+        
+    },
+    "numero5": {
+        "poster": "the-beginning.png",
+        "nome": "the Beginning After the End",
+        "code": 41,
+        "color": "#988044"
+    },
+    "numero6": {
+        "poster": "seeking-the-flying.png",
+        "nome": "seeking the flying sword path",
+        "code": 61,
+        "color": "#0C1325"
+    },
+    "numero7": {
+        "poster": "the-second.png",
+        "nome": "the second coming of gluttony",
+        "code": 48,
+        "color": "#1A202D"
+    },
+    "numero8": {
+        "poster": "tales-of-d.png",
+        "nome": "tales of demons and gods",
+        "code": 59,
+        "color": "#D37D33"
+    }
+
+}
