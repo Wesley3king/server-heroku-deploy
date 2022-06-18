@@ -1,0 +1,14 @@
+{
+    "nome" : "",
+    "capa1" : "",
+    "capa2" : "",
+    "sinopse" : "",
+    "link" : "",
+    "categorias" : [],
+    "capitulos" : {
+        "capitulo0" : {
+            "link": "",
+            "paginas" : []
+        }
+    }
+}

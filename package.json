@@ -1,0 +1,25 @@
+{
+  "name": "server-heroku-deploy",
+  "version": "1.0.0",
+  "description": "servidor para rodar no heroku",
+  "main": "Routes.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wesley3king/server-heroku-deploy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wesley3king/server-heroku-deploy/issues"
+  },
+  "homepage": "https://github.com/Wesley3king/server-heroku-deploy#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongodb": "^4.7.0"
+  }
+}
