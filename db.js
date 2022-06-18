@@ -18,10 +18,9 @@ const conectar = async ()=> {
 const urlUpdate = async (url) => {
     let banco = await conectar();
 
-    await banco.collection(server_banco).updateOne({url: url}, (err, result)=>{
-        if (err) console.log(err)
-        else console.log("inserido");
-    })
+    await banco.collection(server_banco).updateOne({}, {$set: {url: url}});
+
+    return true;
 }
 //gravar o main
 const main_save = async (nomes) => {
@@ -40,7 +39,7 @@ const main_save = async (nomes) => {
     if (ok) return true;
 };
 
-//retirar do main
+//enviar o main
 const find_main = async ()=> {
     let db = await conectar();
     let data = await db.collection(main_banco).findOne({},{projection: {_id: 0}});
@@ -48,13 +47,35 @@ const find_main = async ()=> {
 }
 
 //inserir no data_banco
-const inserir_novo_manga = async (mangas) =>{
-    let banco = await conectar();
-    let db = banco.db(database);
-    db.collection(main_banco).insertMany(mangas, (err, result)=>{
+const inserir_novo_manga = async (manga) =>{
+    let db = await conectar();
+    let ad = await db.collection(data_banco).insertOne(manga, (err, result)=>{
         if (err) console.log(err)
         else console.log("inserido");
     });
+    //return ad ? true : false;
 };
 
-module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate}
+// procurar no banco
+const verificar_manga = async (nome_m) => {
+    let db = await conectar();
+    let encontrar = await db.collection(data_banco).findOne({nome: nome_m}, (err, result)=>{
+        if (err) console.log(err);
+    });
+    return encontrar;
+}
+//enviar o manga do banco
+const obter_manga = async (link) => {
+    let db = await conectar();
+    let encontrar = await db.collection(data_banco).find({"link": link}, (err, result)=>{
+        if (err) console.log(err)
+        else console.log("inserido");
+    });
+    return encontrar;
+}
+//adicionar um capitulo
+const adicionar_capitulo = async (nome,data) => {
+    let db = await conectar();
+    let encontrar = await db.collection(data_banco).update0ne({"nome": nome}, {$push})
+}
+module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, verificar_manga, obter_manga}

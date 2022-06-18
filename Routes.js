@@ -3,6 +3,7 @@ const url = require("url");
 const fs = require("fs");
 const sc = require("./scraping");
 const { isNull } = require("util");
+const mod = require("./componentes");
 const db = require("./db");
 const cors=require("cors");
 const routes = express.Router();
@@ -77,7 +78,7 @@ routes.post('/manga',async (req,res)=>{
     let req_data = req.body;
     console.log("requisicao manga : ",req_data.url);
 
-    let dad = await sc.entrar(req_data.url);
+    let dad = await db.obter_manga(req.url);
 
     res.json({"data": dad});
 
@@ -111,14 +112,16 @@ routes.post('/pesquisar', async (req, res)=>{
 });
 
 // reação de atualização
+
 routes.post('/server/update', async (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     
     let req_data = req.body;
-    await db.urlUpdate(req_data.url);
+    let att = await db.urlUpdate(req_data.url);
     //console.log("requisicao p: ",req_data.nome);
-    res.send("operação concluida");
+    await mod.vasculhar_main();
+    res.send(att?"operação concluida":"falha!");
 });
 
 module.exports = routes;
