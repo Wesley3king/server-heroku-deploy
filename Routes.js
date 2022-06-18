@@ -17,8 +17,9 @@ const corsOptions ={
 
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    
-    res.json(await sc.obter());
+    let data = await db.find_main();
+    console.log("data : ",data);
+    res.json(data);
  });
 
  //eviar destaques
@@ -109,5 +110,15 @@ routes.post('/pesquisar', async (req, res)=>{
     res.json({"data": dados});
 });
 
+// reação de atualização
+routes.post('/server/update', async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    
+    let req_data = req.body;
+    await db.urlUpdate(req_data.url);
+    //console.log("requisicao p: ",req_data.nome);
+    res.send("operação concluida");
+});
 
 module.exports = routes;
