@@ -78,4 +78,6 @@ const adicionar_capitulo = async (nome,data) => {
     let db = await conectar();
     let encontrar = await db.collection(data_banco).update0ne({"nome": nome}, {$push})
 }
+
+//
 module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, verificar_manga, obter_manga}
