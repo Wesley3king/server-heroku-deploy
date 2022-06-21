@@ -67,10 +67,14 @@ const verificar_manga = async (nome_m) => {
 //enviar o manga do banco
 const obter_manga = async (link) => {
     let db = await conectar();
-    let encontrar = await db.collection(data_banco).find({"link": link}, (err, result)=>{
-        if (err) console.log(err)
-        else console.log("inserido");
-    });
+    let encontrar = await db.collection(data_banco).findOne({"link": link}, {projection : {_id: 0}});
+    return encontrar;
+}
+
+//obter capitulo
+const obter_capitulo = async (link, num_url) => {
+    let db = await conectar();
+    let encontrar = await db.collection(data_banco).findOne({"link": link}, {projection : {_id: 0}});
     return encontrar;
 }
 //adicionar um capitulo

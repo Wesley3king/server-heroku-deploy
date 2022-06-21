@@ -4,7 +4,7 @@ const request = require("request");
 const fs = require('fs');
 const db = require("./db");
 const routes = require("./Routes");
-const porta = process.env.PORT || 5200;
+const porta = process.env.PORT || 5000;
 
 const app = express();
 

@@ -78,9 +78,9 @@ routes.post('/manga',async (req,res)=>{
     let req_data = req.body;
     console.log("requisicao manga : ",req_data.url);
 
-    let dad = await db.obter_manga(req.url);
-
-    res.json({"data": dad});
+    let dad = await db.obter_manga(req_data.url);
+    console.log(dad);
+    res.json({"data" : dad});
 
     
 });
