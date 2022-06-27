@@ -3,7 +3,8 @@ const mongoClient = require("mongodb").MongoClient;
 
 const url = "mongodb+srv://king_of_project:UwXWp7BPdGrY1R4l@cluster0.5bcwwx7.mongodb.net/?retryWrites=true&w=majority";
 const database = "mangaka", user_banco = "usuario", main_banco = "mainpage", data_banco = "dataall";
-const server_banco = "servidor"
+const server_banco = "servidor";
+const client_col = "usuarios", user_database = "users";
 
 //estabelece a conexão:
 const conectar = async ()=> {
@@ -83,5 +84,17 @@ const adicionar_capitulo = async (nome,data) => {
     let encontrar = await db.collection(data_banco).update0ne({"nome": nome}, {$push})
 }
 
-//
+//usuario
+//adicionar usuario
+//adicionar favoritos
+
+//adicionar capitulo lido
+const add_readed = async () => {
+
+}
+//remover favorito
+
+//remover capitulo lido
+
+
 module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, verificar_manga, obter_manga}
