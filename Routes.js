@@ -35,38 +35,18 @@ const corsOptions ={
     });
  });
 routes.use(express.json());//habilita que todas as rotas vão receber json
-routes.post('/log', async (req,res)=>{
+routes.post('/login', async (req,res)=>{
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
     let data = req.body;
     console.log(data);
-    //autenticidade
-    /*if (data.inser){
-        let inser = await db.inserir({nome:data.nome, password: data.senha});
-        res.status(201).send(inser);
-    }else{*/
-    let aut = await db.User_dados({user: data.nome});
-    console.log(aut);
-    if (aut.length === 0) {
-        res.status(404).send("dados invalidos");
+    let dados = await db.read_user(data.mail, data.password).catch(console.log);
+    if (dados) {
+        res.json(dados);
     }else{
-        for(let element of aut) {
-            if (element.s_senha_usuario === data.senha) {
-                let favoritos = await db.fav_lidos({tabela: element.s_table_usuario});
-                res.status(200).send({
-                    "nome" : element.s_nome_usuario,
-                    "senha": element.s_senha_usuario,
-                    fav: favoritos
-                });
-            }
-        }
-
-
-
-        
+        res.send(dados);
     }
-
-    
-    //retorno
-    
 });
  //rota MAIN
  routes.use(cors(corsOptions));

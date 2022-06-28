@@ -1,5 +1,6 @@
 {
     "nome_user" : "string",
+    "password" : "string",
     "favoritos" : [
         {
             "nome" : "solo - leveling",

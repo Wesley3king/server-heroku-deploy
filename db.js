@@ -11,10 +11,19 @@ const conectar = async ()=> {
         const client = await mongoClient.connect(url, {
             useNewUrlParser: true,
             useUnifiedTopology: true
-        })
-        console.log('conectado!')
-        return client.db(database)
+        });
+        console.log('conectado!');
+        return client.db(database);
 };
+
+const conectar_user = async () => {
+    const client = await mongoClient.connect(url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+    console.log('conectado!');
+    return client.db(user_database);
+}
 //atualizar url MAINSERVER
 const urlUpdate = async (url) => {
     let banco = await conectar();
@@ -86,15 +95,26 @@ const adicionar_capitulo = async (nome,data) => {
 
 //usuario
 //adicionar usuario
+const add_user = async (data) => {
+    let db = await conectar_user();
+    let insert = await db.collection(user_banco).insertOne(data);
+    return insert ? true : false;
+}
 //adicionar favoritos
 
 //adicionar capitulo lido
-const add_readed = async () => {
+const add_readed = async (mail, senha) => {
 
 }
 //remover favorito
 
 //remover capitulo lido
 
+//ler usuario
+const read_user = async (mail, senha) => {
+    let db = await conectar_user();
+    let data = db.collection(user_banco).findOne({address : mail, password: senha},{projection : {_id : 0}});
+    return data ? data : false;
+}
 
-module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, verificar_manga, obter_manga}
+module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, verificar_manga, obter_manga, add_user, read_user}
