@@ -103,8 +103,11 @@ const add_user = async (data) => {
 //adicionar favoritos
 
 //adicionar capitulo lido
-const add_readed = async (mail, senha) => {
-
+const add_readed = async (mail, senha, pos , data) => {
+    let db = await conectar_user();
+    let query = {"$push": {lidos : {"$each": [data], "$position": pos}}};
+    let insert = await db.collection(user_banco).updateMany({address: mail , password: senha}, query);
+    return insert ? true : false;
 }
 //remover favorito
 
@@ -117,4 +120,4 @@ const read_user = async (mail, senha) => {
     return data ? data : false;
 }
 
-module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, verificar_manga, obter_manga, add_user, read_user}
+module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, verificar_manga, obter_manga, add_user, add_readed, read_user}

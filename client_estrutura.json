@@ -5,22 +5,8 @@
         {
             "nome" : "solo - leveling",
             "url" : "link",
-            "img" : "img1.png",
-            "lidos" : ["04045854", "473645"]
-        },
-        {
-            "nome" : "solo - leveling",
-            "url" : "link",
-            "img" : "img1.png",
-            "lidos" : ["04045854", "473645"]
+            "img" : "img1.png"
         }
     ],
-    "lidos_only" : [
-        {
-            "nome" : "solo - leveling",
-            "url" : "link",
-            "img" : "img1.png",
-            "lidos" : ["04045854", "473645"]
-        }
-    ]
+    "lidos" : [["solo leveling", ["98347","8905657"]]]
 }
