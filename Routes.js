@@ -48,6 +48,15 @@ routes.post('/login', async (req,res)=>{
         res.send(dados);
     }
 });
+//rota de alteração de capitulos
+routes.post('/alterarcap', async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    let data = req.body;
+    console.log(data);
+    let dados = await db.read_user(data.mail, data.password).catch(console.log);
+});
  //rota MAIN
  routes.use(cors(corsOptions));
 routes.post('/manga',async (req,res)=>{
