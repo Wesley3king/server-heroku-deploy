@@ -1,5 +1,5 @@
 const db = require("./db");
-const axios = require("axios");
+//const axios = require("axios");
 
 //atualiza o main
 async function requestMain () {
