@@ -19,7 +19,11 @@
   },
   "homepage": "https://github.com/Wesley3king/server-heroku-deploy#readme",
   "dependencies": {
+    "request": "^2.88.2",
     "express": "^4.18.1",
     "mongodb": "^4.7.0"
+  },
+  "engines": {
+    "node": "16.15.1"
   }
 }
