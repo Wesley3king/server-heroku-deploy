@@ -1,6 +1,6 @@
 // - mangaKa - version : 0.0.1
 const express = require("express");
-const request = require("request");
+//const request = require("request");
 const fs = require('fs');
 const db = require("./db");
 const routes = require("./Routes");
@@ -20,10 +20,10 @@ async function requestMain () {
     })
 }
 requestMain();
-*/
+
  async function inserir () {
     let readed = await db.add_readed("moraeswesley290@gmail.com", "mangaka#1", 0, {nome : "Solo Leveling", mark : ["37822","37824","37828"]});
     console.log(readed ? "inserido":"failed");
- }
+ }*/
  //inserir();
 app.listen(porta, ()=> console.log("servidor rodando na porta : "+ porta));
