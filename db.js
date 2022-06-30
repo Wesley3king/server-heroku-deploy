@@ -1,5 +1,7 @@
 //mongo db connection
-const mongoClient = require("mongodb").MongoClient;
+//const mongo = require("mongodb");
+//const mongoClient = mongo.MongoClient;
+const connect_db = require("./db_testes");
 
 const url = "mongodb+srv://king_of_project:UwXWp7BPdGrY1R4l@cluster0.5bcwwx7.mongodb.net/?retryWrites=true&w=majority";
 const database = "mangaka", user_banco = "usuario", main_banco = "mainpage", data_banco = "dataall";
@@ -8,12 +10,9 @@ const client_col = "usuarios", user_database = "users";
 
 //estabelece a conexão:
 const conectar = async ()=> {
-        const client = await mongoClient.connect(url, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        }).catch(e => {console.log(e); conectar()});
+        const client = await connect_db.connect().catch(console.log);
         console.log('conectado!');
-        return client.db(database);
+        return client ? client.db(database) : conectar();
 };
 
 const conectar_user = async () => {

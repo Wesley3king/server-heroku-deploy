@@ -15,7 +15,7 @@ const corsOptions ={
  
 //rota HOME - rota HOME logado
  routes.get('/',async (req,res)=>{
-
+//https://wesley3king.github.io/mangaKa/maked/
     res.setHeader("Access-Control-Allow-Origin", "https://wesley3king.github.io/mangaKa/maked/");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     let data = await db.find_main();
