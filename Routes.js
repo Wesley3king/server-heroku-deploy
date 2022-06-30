@@ -1,8 +1,8 @@
 const express = require("express");
-const url = require("url");
+//const url = require("url");
 const fs = require("fs");
-const sc = require("./scraping");
-const { isNull } = require("util");
+//const sc = require("./scraping");
+//const { isNull } = require("util");
 const mod = require("./componentes");
 const db = require("./db");
 const cors=require("cors");
@@ -83,7 +83,7 @@ routes.post('/manga',async (req,res)=>{
 
 //leitor
 
-routes.post('/manga/leitor', async (req, res)=>{
+/*routes.post('/manga/leitor', async (req, res)=>{
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     
@@ -92,11 +92,11 @@ routes.post('/manga/leitor', async (req, res)=>{
     let dados = await sc.leitor(req_data.url).catch(e=>console.log(e));
     console.log(dados);
     res.json({"data": dados});
-});
+});*/
 
 //pesquisar
 
-routes.post('/pesquisar', async (req, res)=>{
+/*routes.post('/pesquisar', async (req, res)=>{
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     
@@ -105,7 +105,7 @@ routes.post('/pesquisar', async (req, res)=>{
     let dados = await sc.search("https://mangayabu.top/lista-de-mangas/#mangasearch",req_data.nome).catch(e=>console.log(e));
     console.log(dados);
     res.json({"data": dados});
-});
+});*/
 
 // reação de atualização
 

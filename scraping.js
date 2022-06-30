@@ -1,6 +1,6 @@
 //modulo de scraping dos sites
 
-const puppeteer = require("puppeteer");
+//const puppeteer = require("puppeteer");
 const fs = require("fs");
 
 
