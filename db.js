@@ -12,7 +12,7 @@ const client_col = "usuarios", user_database = "users";
 const conectar = async ()=> {
         const client = await connect_db.connect().catch(console.log);
         console.log('conectado!');
-        return client ? client.db(database) : conectar();
+        return client;
 };
 
 const conectar_user = async () => {
