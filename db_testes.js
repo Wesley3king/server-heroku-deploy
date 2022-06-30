@@ -7,8 +7,8 @@ const connect = async () => {
     const client = await mongoClient.connect(url, {
         useNewUrlParser: true,
         useUnifiedTopology: true
-    }).catch(e => {console.log(e); conectar()});
-    return client ? client : false;
+    }).catch(console.log);
+    return client;
 }
 
 module.exports = { connect };
