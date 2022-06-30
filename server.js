@@ -25,5 +25,5 @@ requestMain();
     let readed = await db.add_readed("moraeswesley290@gmail.com", "mangaka#1", 0, {nome : "Solo Leveling", mark : ["37822","37824","37828"]});
     console.log(readed ? "inserido":"failed");
  }
- inserir();
+ //inserir();
 app.listen(porta, ()=> console.log("servidor rodando na porta : "+ porta));

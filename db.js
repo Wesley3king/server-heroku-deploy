@@ -11,7 +11,7 @@ const conectar = async ()=> {
         const client = await mongoClient.connect(url, {
             useNewUrlParser: true,
             useUnifiedTopology: true
-        });
+        }).catch(e => {console.log(e); conectar()});
         console.log('conectado!');
         return client.db(database);
 };
@@ -112,7 +112,13 @@ const add_readed = async (mail, senha, pos , data) => {
 //remover favorito
 
 //remover capitulo lido
-
+const pull_readed = async (mail, senha, data) => {
+    let db = await conectar_user(); // data === nome
+    let query = {"$pull": {"lidos" : {nome : data}}};
+    let inserir = await db.collection(user_banco).updateOne({address: mail, password : senha}, query);
+    console.log(inserir);
+    return typeof inserir === "object" ? true : false;
+};
 //ler usuario
 const read_user = async (mail, senha) => {
     let db = await conectar_user();
@@ -120,4 +126,4 @@ const read_user = async (mail, senha) => {
     return data ? data : false;
 }
 
-module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, verificar_manga, obter_manga, add_user, add_readed, read_user}
+module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, verificar_manga, obter_manga, add_user, add_readed, pull_readed,read_user}

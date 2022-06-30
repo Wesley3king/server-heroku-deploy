@@ -54,8 +54,15 @@ routes.post('/alterarcap', async (req, res) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
     let data = req.body;
-    console.log(data);
-    let dados = await db.read_user(data.mail, data.password).catch(console.log);
+    console.log(data); // mail / pass / arr
+//  let dados = await db.read_user(data.mail, data.password).catch(console.log);
+    let pull = await db.pull_readed(data.mail, data.password, data.dados["nome"]).catch(console.log);
+    let inserir = false;
+    if (pull) {
+        inserir = await db.add_readed(data.mail, data.password, 0, data.dados).catch(console.log);
+    }
+
+    res.send(inserir);
 });
  //rota MAIN
  routes.use(cors(corsOptions));

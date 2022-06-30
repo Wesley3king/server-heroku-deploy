@@ -1,6 +1,6 @@
 {
   "name": "server-heroku-deploy",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "servidor para rodar no heroku",
   "main": "Routes.js",
   "scripts": {
