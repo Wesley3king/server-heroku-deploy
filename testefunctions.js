@@ -13,3 +13,8 @@ const retirar_cap = async (i) => {
 }
 
 module.exports = {retirar_cap};
+
+// remoções de pacotes desnecessarios
+//,
+//"request": "^2.88.2"
+//"axios": "^0.27.2",
