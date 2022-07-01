@@ -9,7 +9,7 @@ const cors=require("cors");
 const routes = express.Router();
 const corsOptions ={
     origin:'*',
-    methods: ['GET', 'PUT', 'POST'],
+    methods: ['GET', 'POST'],
     //allowedHeaders: "*",
     credentials:true,
     exposedHeaders: '*',
