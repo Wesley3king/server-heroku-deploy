@@ -8,11 +8,11 @@ const db = require("./db");
 const cors=require("cors");
 const routes = express.Router();
 const corsOptions ={
-    "origin":'*',
-    "methods": ['GET', 'POST'],
+    "origin":"*",
+    "methods": "GET, POST",
     //allowedHeaders: "*",
     "credentials":true,
-    "exposedHeaders": '*',
+    "exposedHeaders": "*",
     "credentials":true,
     "optionSuccessStatus":200
  }
