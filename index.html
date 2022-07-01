@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>teste de cors</h1>
+
+    <button onclick="buscar()" > buscar</button>
+
+    <script>
+        const method = {"method" : "POST"};
+
+        async function buscar () {
+            /*const res = await fetch("https://vast-falls-98079.herokuapp.com/", { "header": method });
+            if (res.ok) {
+                console.log(
+                res.status === 204 ? "STATUS CODE: 204" : (await res.json()).text
+                );
+            } else {
+                throw await res.text();
+            }*/
+                    fetch('https://vast-falls-98079.herokuapp.com/')
+                    .then(res => res.json())
+                    .then(data => {console.log(data)})
+        }
+
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-// - mangaKa - version : 0.1.2
+// - mangaKa - version : 0.1.3
 const express = require("express");
 const http = require("http");
 //const request = require("request");
