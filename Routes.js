@@ -9,7 +9,10 @@ const cors=require("cors");
 const routes = express.Router();
 const corsOptions ={
     origin:'*', 
-    credentials:true,            //access-control-allow-credentials:true
+    credentials:true,
+    exposedHeaders: '*',
+    allowedHeaders: ['Content-type', 'application/json'],
+    credentials:true,
     optionSuccessStatus:200,
  }
  //configurar o cors
@@ -17,8 +20,8 @@ const corsOptions ={
 //rota HOME - rota HOME logado
  routes.get('/',async (req,res)=>{
 //https://wesley3king.github.io/mangaKa/maked/
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //res.setHeader("Access-Control-Allow-Origin", "*");
+    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     let data = await db.find_main();
     console.log("data : ",data);
     res.json(data);
@@ -26,8 +29,8 @@ const corsOptions ={
 
  //eviar destaques
  routes.get("/destaques",(req,res)=>{
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //res.setHeader("Access-Control-Allow-Origin", "*");
+    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
     fs.readFile("./archives/Destaques.json",(err,file)=>{
         if(err) console.log("erro ao ler list.json");
@@ -37,8 +40,8 @@ const corsOptions ={
  });
 routes.use(express.json());//habilita que todas as rotas vão receber json
 routes.post('/login', async (req,res)=>{
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //res.setHeader("Access-Control-Allow-Origin", "*");
+    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
     let data = req.body;
     console.log(data);
@@ -51,8 +54,8 @@ routes.post('/login', async (req,res)=>{
 });
 //rota de alteração de capitulos
 routes.post('/alterarcap', async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //res.setHeader("Access-Control-Allow-Origin", "*");
+    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
     let data = req.body;
     console.log(data); // mail / pass / arr
@@ -110,8 +113,8 @@ routes.post('/manga',async (req,res)=>{
 // reação de atualização
 
 routes.post('/server/update', async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //res.setHeader("Access-Control-Allow-Origin", "*");
+    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     
     let req_data = req.body;
     let att = await db.urlUpdate(req_data.url);
