@@ -12,7 +12,8 @@ const corsOptions ={
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200,
  }
- 
+ //configurar o cors
+ routes.use(cors(corsOptions));
 //rota HOME - rota HOME logado
  routes.get('/',async (req,res)=>{
 //https://wesley3king.github.io/mangaKa/maked/
@@ -65,7 +66,6 @@ routes.post('/alterarcap', async (req, res) => {
     res.send(inserir);
 });
  //rota MAIN
- routes.use(cors(corsOptions));
 routes.post('/manga',async (req,res)=>{
 
     res.setHeader("Access-Control-Allow-Origin", "*");
