@@ -17,7 +17,7 @@ const corsOptions ={
     "optionSuccessStatus":200
  }
  //configurar o cors
- routes.use(cors(corsOptions));
+ routes.use(cors());
 //rota HOME - rota HOME logado
  routes.get('/',async (req,res)=>{
 //https://wesley3king.github.io/mangaKa/maked/
