@@ -16,7 +16,7 @@ const corsOptions ={
 //rota HOME - rota HOME logado
  routes.get('/',async (req,res)=>{
 //https://wesley3king.github.io/mangaKa/maked/
-    res.setHeader("Access-Control-Allow-Origin", "https://wesley3king.github.io/mangaKa/maked/");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     let data = await db.find_main();
     console.log("data : ",data);
@@ -25,7 +25,7 @@ const corsOptions ={
 
  //eviar destaques
  routes.get("/destaques",(req,res)=>{
-    res.setHeader("Access-Control-Allow-Origin", "https://wesley3king.github.io/mangaKa/maked/");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
     fs.readFile("./archives/Destaques.json",(err,file)=>{
@@ -36,7 +36,7 @@ const corsOptions ={
  });
 routes.use(express.json());//habilita que todas as rotas vão receber json
 routes.post('/login', async (req,res)=>{
-    res.setHeader("Access-Control-Allow-Origin", "https://wesley3king.github.io/mangaKa/maked/");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
     let data = req.body;
