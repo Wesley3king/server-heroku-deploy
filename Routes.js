@@ -17,9 +17,9 @@ const corsOptions ={
     "optionSuccessStatus":200
  }
  //configurar o cors
- routes.use(cors());
+ //routes.use(cors(corsOptions));
 //rota HOME - rota HOME logado
- routes.get('/',async (req,res)=>{
+ routes.get('/',cors(corsOptions),async (req,res)=>{
 //https://wesley3king.github.io/mangaKa/maked/
     //res.setHeader("Access-Control-Allow-Origin", "*");
     //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -29,7 +29,7 @@ const corsOptions ={
  });
 
  //eviar destaques
- routes.get("/destaques",(req,res)=>{
+ routes.get("/destaques",cors(corsOptions),(req,res)=>{
     //res.setHeader("Access-Control-Allow-Origin", "*");
     //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
@@ -40,7 +40,7 @@ const corsOptions ={
     });
  });
 routes.use(express.json());//habilita que todas as rotas vão receber json
-routes.post('/login', async (req,res)=>{
+routes.post('/login',cors(corsOptions), async (req,res)=>{
     //res.setHeader("Access-Control-Allow-Origin", "*");
     //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
