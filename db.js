@@ -1,32 +1,35 @@
 //mongo db connection
-//const mongo = require("mongodb");
-//const mongoClient = mongo.MongoClient;
-const connect_db = require("./db_testes");
+const mongo = require("mongodb");
+const mongoClient = mongo.MongoClient;
+//const connect_db = require("./db_testes");
 
 const url = "mongodb+srv://king_of_project:UwXWp7BPdGrY1R4l@cluster0.5bcwwx7.mongodb.net/?retryWrites=true&w=majority";
 const database = "mangaka", user_banco = "usuario", main_banco = "mainpage", data_banco = "dataall";
 const server_banco = "servidor";
-const client_col = "usuarios", user_database = "users";
+const user_database = "users";
 
 //estabelece a conexão:
 const conectar = async ()=> {
-        const client = await connect_db.connect().catch(console.log);
+        //const client = await connect_db.connect().catch(console.log);
+        const client = await mongoClient.connect(url, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        }).catch(console.log);
         console.log('conectado!');
-        return client;
+        return client.db(database);
 };
 
 const conectar_user = async () => {
     const client = await mongoClient.connect(url, {
         useNewUrlParser: true,
         useUnifiedTopology: true
-    });
+    }).catch(console.log);
     console.log('conectado!');
     return client.db(user_database);
 }
 //atualizar url MAINSERVER
 const urlUpdate = async (url) => {
     let banco = await conectar();
-
     await banco.collection(server_banco).updateOne({}, {$set: {url: url}});
 
     return true;

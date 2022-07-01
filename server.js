@@ -1,5 +1,6 @@
-// - mangaKa - version : 0.0.1
+// - mangaKa - version : 0.1.1
 const express = require("express");
+const http = require("http");
 //const request = require("request");
 const fs = require('fs');
 const db = require("./db");
@@ -26,4 +27,5 @@ requestMain();
     console.log(readed ? "inserido":"failed");
  }*/
  //inserir();
-app.listen(porta, ()=> console.log("servidor rodando na porta : "+ porta));
+ const server = http.createServer(app);
+server.listen(porta, ()=> console.log("servidor rodando na porta : "+ porta));
