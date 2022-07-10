@@ -1,4 +1,4 @@
-{
+[{
     "nome" : "",
     "capa1" : "",
     "capa2" : "",
@@ -11,4 +11,12 @@
             "paginas" : []
         }
     }
+},
+{
+    "nome" : "String",
+    "url" : "String",
+    "img"  : "String",
+    "mail" : "String",
+    "password" : "String"
 }
+]

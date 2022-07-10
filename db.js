@@ -3,7 +3,7 @@ const mongo = require("mongodb");
 const mongoClient = mongo.MongoClient;
 //const connect_db = require("./db_testes");
 
-const url = "";
+const url = "mongodb+srv://king_of_project:UwXWp7BPdGrY1R4l@cluster0.5bcwwx7.mongodb.net/?retryWrites=true&w=majority";
 const database = "mangaka", user_banco = "usuario", main_banco = "mainpage", data_banco = "dataall";
 const server_banco = "servidor";
 const user_database = "users";
@@ -101,17 +101,38 @@ const add_user = async (data) => {
     let db = await conectar_user();
     let insert = await db.collection(user_banco).insertOne(data);
     return insert ? true : false;
-}
+};
+
+//ler usuario
+const read_user = async (mail, senha) => {
+    let db = await conectar_user();
+    let data = db.collection(user_banco).findOne({address : mail, password: senha},{projection : {_id : 0}});
+    return data ? data : false;
+};
+
 //adicionar favoritos
 
+const add_favorito = async (mail, senha, data) => {
+    let db = await conectar().catch(console.log);
+    let query = {"$push" : {favoritos: {"$each": data, "$position": 0}}};
+    let insert = await db.collection(user_banco).updateMany({address: mail , password: senha}, query);
+    return insert ? true : false;
+}
+
+//remover favorito
+const delete_favorito = async (mail, senha, data) => {
+    let db = await conectar().catch(console.log);
+    let query = {"$pull" : {favoritos: {nome: data}}};
+    let insert = await db.collection(user_banco).updateMany({address: mail , password: senha}, query);
+    return insert ? true : false;
+};
 //adicionar capitulo lido
 const add_readed = async (mail, senha, pos , data) => {
     let db = await conectar_user();
     let query = {"$push": {lidos : {"$each": [data], "$position": pos}}};
     let insert = await db.collection(user_banco).updateMany({address: mail , password: senha}, query);
     return insert ? true : false;
-}
-//remover favorito
+};
 
 //remover capitulo lido
 const pull_readed = async (mail, senha, data) => {
@@ -121,11 +142,5 @@ const pull_readed = async (mail, senha, data) => {
     console.log(inserir);
     return typeof inserir === "object" ? true : false;
 };
-//ler usuario
-const read_user = async (mail, senha) => {
-    let db = await conectar_user();
-    let data = db.collection(user_banco).findOne({address : mail, password: senha},{projection : {_id : 0}});
-    return data ? data : false;
-}
 
-module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, verificar_manga, obter_manga, add_user, add_readed, pull_readed,read_user}
+module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, verificar_manga, obter_manga, add_user, add_readed, pull_readed,read_user, add_favorito, delete_favorito }

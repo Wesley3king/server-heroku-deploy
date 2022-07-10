@@ -41,8 +41,6 @@ const corsOptions ={
  });
 routes.use(express.json());//habilita que todas as rotas vão receber json
 routes.post('/login', async (req,res)=>{
-    //res.setHeader("Access-Control-Allow-Origin", "*");
-    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
     let data = req.body;
     console.log(data);
@@ -52,6 +50,26 @@ routes.post('/login', async (req,res)=>{
     }else{
         res.send(dados);
     }
+});
+
+//rota de alteração de favoritos
+routes.post('/favoritos', async (req, res) => {
+
+    let dados = req.body;
+    console.log(dados);
+    let favorito = {
+        nome: dados.nome,
+        url: dados.link,
+        img: dados.img
+    };
+
+    let pull = await db.delete_favorito(dados.mail, dados.password, dados.nome).catch(console.log);
+    let adicionado = false;
+    if (pull) {
+        adicionado = await db.add_favorito(dados.mail, dados.password, favorito).catch(console.log);
+    }
+
+    res.send(adicionado);
 });
 //rota de alteração de capitulos
 routes.post('/alterarcap', async (req, res) => {
