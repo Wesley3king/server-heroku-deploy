@@ -3,7 +3,7 @@ const mongo = require("mongodb");
 const mongoClient = mongo.MongoClient;
 //const connect_db = require("./db_testes");
 
-const url = "mongodb+srv://king_of_project:UwXWp7BPdGrY1R4l@cluster0.5bcwwx7.mongodb.net/?retryWrites=true&w=majority";
+const url = "";
 const database = "mangaka", user_banco = "usuario", main_banco = "mainpage", data_banco = "dataall";
 const server_banco = "servidor";
 const user_database = "users";
@@ -113,18 +113,20 @@ const read_user = async (mail, senha) => {
 //adicionar favoritos
 
 const add_favorito = async (mail, senha, data) => {
-    let db = await conectar().catch(console.log);
-    let query = {"$push" : {favoritos: {"$each": data, "$position": 0}}};
+    let db = await conectar_user().catch(console.log);
+    let query = {"$push" : {"favoritos": {"$each": [data], "$position": 0}}};
     let insert = await db.collection(user_banco).updateMany({address: mail , password: senha}, query);
+    console.log(insert);
     return insert ? true : false;
 }
 
 //remover favorito
 const delete_favorito = async (mail, senha, data) => {
-    let db = await conectar().catch(console.log);
-    let query = {"$pull" : {favoritos: {nome: data}}};
+    let db = await conectar_user().catch(console.log);
+    console.log(data);
+    let query = {"$pull" : {favoritos : {nome : data}}};
     let insert = await db.collection(user_banco).updateMany({address: mail , password: senha}, query);
-    return insert ? true : false;
+    return insert;
 };
 //adicionar capitulo lido
 const add_readed = async (mail, senha, pos , data) => {

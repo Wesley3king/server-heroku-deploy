@@ -63,12 +63,14 @@ routes.post('/favoritos', async (req, res) => {
         img: dados.img
     };
 
-    let pull = await db.delete_favorito(dados.mail, dados.password, dados.nome).catch(console.log);
+    let pull = await db.delete_favorito(dados.mail, dados.password, dados["nome"]).catch(console.log);
     let adicionado = false;
-    if (pull) {
+    console.log(pull);
+    if (pull.modifiedCount === 0) {
+        console.log("inserir");
         adicionado = await db.add_favorito(dados.mail, dados.password, favorito).catch(console.log);
-    }
-
+    };
+    console.log("finalized");
     res.send(adicionado);
 });
 //rota de alteração de capitulos
