@@ -3,7 +3,7 @@ const mongo = require("mongodb");
 const mongoClient = mongo.MongoClient;
 //const connect_db = require("./db_testes");
 
-const url = "";
+const url = "mongodb+srv://king_of_project:UwXWp7BPdGrY1R4l@cluster0.5bcwwx7.mongodb.net/?retryWrites=true&w=majority";
 const database = "mangaka", user_banco = "usuario", main_banco = "mainpage", data_banco = "dataall";
 const server_banco = "servidor";
 const user_database = "users";
@@ -26,14 +26,20 @@ const conectar_user = async () => {
     }).catch(console.log);
     console.log('conectado!');
     return client.db(user_database);
-}
+};
 //atualizar url MAINSERVER
 const urlUpdate = async (url) => {
     let banco = await conectar();
     await banco.collection(server_banco).updateOne({}, {$set: {url: url}});
 
     return true;
-}
+};
+//pegar o servidor id
+const urlGet = async () => {
+    let banco = await conectar().catch(console.log);
+    let res = await banco.collection(server_banco).findOne({}, {projection: {_id: 0}});
+    return res;
+};
 //gravar o main
 const main_save = async (nomes) => {
     let banco = await conectar();
@@ -145,4 +151,4 @@ const pull_readed = async (mail, senha, data) => {
     return typeof inserir === "object" ? true : false;
 };
 
-module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, verificar_manga, obter_manga, add_user, add_readed, pull_readed,read_user, add_favorito, delete_favorito }
+module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, urlGet, verificar_manga, obter_manga, add_user, add_readed, pull_readed,read_user, add_favorito, delete_favorito }

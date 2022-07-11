@@ -56,31 +56,29 @@ routes.post('/login', async (req,res)=>{
 routes.post('/favoritos', async (req, res) => {
 
     let dados = req.body;
-    console.log(dados);
+    
     let favorito = {
         nome: dados.nome,
         url: dados.link,
         img: dados.img
     };
-
+    let modificado = false;
     let pull = await db.delete_favorito(dados.mail, dados.password, dados["nome"]).catch(console.log);
-    let adicionado = false;
-    console.log(pull);
+    pull ? modificado = true : modificado = false;
+    
+    
     if (pull.modifiedCount === 0) {
         console.log("inserir");
-        adicionado = await db.add_favorito(dados.mail, dados.password, favorito).catch(console.log);
+        modificado = await db.add_favorito(dados.mail, dados.password, favorito).catch(console.log);
     };
-    console.log("finalized");
-    res.send(adicionado);
+    res.send(modificado);
 });
 //rota de alteração de capitulos
 routes.post('/alterarcap', async (req, res) => {
-    //res.setHeader("Access-Control-Allow-Origin", "*");
-    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
     let data = req.body;
     console.log(data); // mail / pass / arr
-//  let dados = await db.read_user(data.mail, data.password).catch(console.log);
+
     let pull = await db.pull_readed(data.mail, data.password, data.dados["nome"]).catch(console.log);
     let inserir = false;
     if (pull) {
@@ -119,8 +117,7 @@ routes.post('/manga',async (req,res)=>{
 });*/
 
 //pesquisar
-
-/*routes.post('/pesquisar', async (req, res)=>{
+/* routes.post('/server', async (req, res)=>{
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     
@@ -129,17 +126,22 @@ routes.post('/manga',async (req,res)=>{
     let dados = await sc.search("https://mangayabu.top/lista-de-mangas/#mangasearch",req_data.nome).catch(e=>console.log(e));
     console.log(dados);
     res.json({"data": dados});
-});*/
+}); */
+
+//servidor
+routes.get('/server', async (req, res)=>{
+    
+    let dados = await db.urlGet().catch(console.log);
+    res.json(dados);
+});
 
 // reação de atualização
 
 routes.post('/server/update', async (req, res) => {
-    //res.setHeader("Access-Control-Allow-Origin", "*");
-    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    
+   
     let req_data = req.body;
     let att = await db.urlUpdate(req_data.url);
-    //console.log("requisicao p: ",req_data.nome);
+    
     await mod.vasculhar_main();
     res.send(att?"operação concluida":"falha!");
 });
