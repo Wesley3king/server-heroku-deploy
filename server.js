@@ -2,17 +2,17 @@
 const express = require("express");
 const http = require("http");
 //const request = require("request");
-const fs = require('fs');
-const db = require("./db");
+// const fs = require('fs');
+// const db = require("./db");
 const routes = require("./Routes");
 const porta = process.env.PORT || 5000;
 
 //ver o ip
-const axios = require("axios");
-axios({
-    url:'http://api.ipify.org'
-})
-.then(res => console.log(res.data));
+// const axios = require("axios");
+// axios({
+//     url:'http://api.ipify.org'
+// })
+// .then(res => console.log(res.data));
 const app = express();
 
 app.use(routes);

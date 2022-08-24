@@ -6,11 +6,12 @@ const fs = require("fs");
 const mod = require("./componentes");
 const db = require("./db");
 const cors=require("cors");
+const bodyParser = require("body-parser");
 const routes = express.Router();
 const corsOptions ={
     "origin":"*",
     "methods": "GET, POST",
-    //allowedHeaders: "*",
+    "allowedHeaders": "*",
     "credentials":true,
     "exposedHeaders": "*",
     "credentials":true,
@@ -18,11 +19,11 @@ const corsOptions ={
  }
  //configurar o cors
  routes.use(cors(corsOptions));
+ routes.use(express.json());//habilita que todas as rotas vão receber json
+
 //rota HOME - rota HOME logado
  routes.get('/',async (req,res)=>{
-//https://wesley3king.github.io/mangaKa/maked/
-    //res.setHeader("Access-Control-Allow-Origin", "*");
-    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
     let data = await db.find_main();
     console.log("data : ",data);
     res.json(data);
@@ -30,8 +31,6 @@ const corsOptions ={
 
  //eviar destaques
  routes.get("/destaques",(req,res)=>{
-    //res.setHeader("Access-Control-Allow-Origin", "*");
-    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
     fs.readFile("./archives/Destaques.json",(err,file)=>{
         if(err) console.log("erro ao ler list.json");
@@ -39,7 +38,6 @@ const corsOptions ={
         res.json(ark);
     });
  });
-routes.use(express.json());//habilita que todas as rotas vão receber json
 routes.post('/login', async (req,res)=>{
 
     let data = req.body;
@@ -89,10 +87,6 @@ routes.post('/alterarcap', async (req, res) => {
 });
  //rota MAIN
 routes.post('/manga',async (req,res)=>{
-
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    
     let req_data = req.body;
     console.log("requisicao manga : ",req_data.url);
 
