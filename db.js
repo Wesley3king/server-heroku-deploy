@@ -85,7 +85,8 @@ const verificar_manga = async (nome_m) => {
 //enviar o manga do banco
 const obter_manga = async (link) => {
     let db = await conectar();
-    let encontrar = await db.collection(data_banco).findOne({"link": link}, {projection : {_id: 0}});
+    let regex = new RegExp(`${link}`, 'ig');
+    let encontrar = await db.collection(data_banco).findOne({"link": regex}, {projection : {_id: 0}});
     return encontrar;
 }
 

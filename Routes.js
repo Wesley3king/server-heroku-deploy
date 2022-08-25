@@ -6,7 +6,6 @@ const fs = require("fs");
 const mod = require("./componentes");
 const db = require("./db");
 const cors=require("cors");
-const bodyParser = require("body-parser");
 const routes = express.Router();
 const corsOptions ={
     "origin":"*",
