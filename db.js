@@ -3,7 +3,7 @@ const mongo = require("mongodb");
 const mongoClient = mongo.MongoClient;
 //const connect_db = require("./db_testes");
 
-const url = "";
+const url = "mongodb+srv://king_of_project:UwXWp7BPdGrY1R4l@cluster0.5bcwwx7.mongodb.net/?retryWrites=true&w=majority";
 const database = "mangaka", user_banco = "usuario", main_banco = "mainpage", data_banco = "dataall";
 const server_banco = "servidor";
 const user_database = "users";
@@ -89,6 +89,13 @@ const obter_manga = async (link) => {
     let encontrar = await db.collection(data_banco).findOne({"link": regex}, {projection : {_id: 0}});
     return encontrar;
 }
+//procurar os mangas do banco
+const searchMangas = async (txt) => {
+    let db = await conectar();
+    let regex = new RegExp(`${txt}`, 'ig');
+    let encontrados = await db.collection(data_banco).find({"nome": regex}, {projection : {_id: 0}});
+    return encontrados;
+}
 
 //obter capitulo
 const obter_capitulo = async (link, num_url) => {
@@ -152,4 +159,4 @@ const pull_readed = async (mail, senha, data) => {
     return typeof inserir === "object" ? true : false;
 };
 
-module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, urlGet, verificar_manga, obter_manga, add_user, add_readed, pull_readed,read_user, add_favorito, delete_favorito }
+module.exports = {main_save, find_main, inserir_novo_manga, urlUpdate, urlGet, verificar_manga, obter_manga, searchMangas, add_user, add_readed, pull_readed,read_user, add_favorito, delete_favorito }

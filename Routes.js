@@ -96,6 +96,16 @@ routes.post('/manga',async (req,res)=>{
     
 });
 
+routes.post('/search', async (req, res) => {
+    let reqData = req.body.txt;
+    db.searchMangas(reqData)
+    .then((data) => res.json({"data": data}))
+    .catch((e) => {
+        console.log("erro no search! = ",e);
+        res.json({"data": []});
+    })
+});
+
 //leitor
 
 /*routes.post('/manga/leitor', async (req, res)=>{
