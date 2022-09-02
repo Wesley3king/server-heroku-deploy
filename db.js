@@ -93,7 +93,7 @@ const obter_manga = async (link) => {
 const searchMangas = async (txt) => {
     let db = await conectar();
     let regex = new RegExp(`${txt}`, 'ig');
-    let encontrados = await db.collection(data_banco).find({"nome": regex}, {projection : {_id: 0}});
+    let encontrados = await db.collection(data_banco).find({"nome": regex}, {projection : {_id: 0, sinopse: 0, capitulos: 0, categorias: 0}});
     return encontrados;
 }
 
