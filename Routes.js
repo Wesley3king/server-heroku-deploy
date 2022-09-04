@@ -146,7 +146,7 @@ routes.post('/server/update', async (req, res) => {
     let req_data = req.body;
     let att = await db.urlUpdate(req_data.url);
     
-    await mod.vasculhar_main();
+    //await mod.vasculhar_main();
     res.send(att?"operação concluida":"falha!");
 });
 
